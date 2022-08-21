@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Rosetext">#FF9B71</color>
+    <color name="bluetext">#053DE7</color>
+    <color name="bgcolor">#e9c46a</color>
+    <color name="buttonbgcolor">#2a9d8f</color>
+    <color name="lightgray">#a3b18a</color>
+
+
+
 </resources>
