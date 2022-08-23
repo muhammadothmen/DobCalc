@@ -10,69 +10,69 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private var tvselecteddate: TextView? = null
-    private var tvinminutes: TextView? = null
-    private  var btndate: Button?=null
+
+      private  var selDateBtn: Button?=null
+      private var inMinuteText: TextView? = null
+      private var inDaysText: TextView? = null
+      private var inHoursText: TextView? = null
+      private var inSecondsText: TextView? = null
+      private var selDateText: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-      //private  val btndate: Button = findViewById(R.id.btndate)
-        btndate = findViewById(R.id.btndate)
-        tvselecteddate = findViewById(R.id.selecteddate)
-        tvinminutes= findViewById(R.id.inminutes)
-        btndate?.setOnClickListener {
+        selDateText=findViewById(R.id.TxtSelDate)
+        inMinuteText=findViewById(R.id.TxtInMinute)
+        inHoursText=findViewById(R.id.TxtInHours)
+        inDaysText=findViewById(R.id.TxtInDays)
+        inSecondsText=findViewById(R.id.TxtInSecond)
+        selDateBtn=findViewById(R.id.BtnDateSel)
 
-           // clicked()
-            click()
-
+        selDateBtn?.setOnClickListener {
+            selDateBtnClicked()
         }
 
     }
+    private fun selDateBtnClicked (){
 
-  private  fun clicked() {
+         val myCalendar =Calendar.getInstance()
+         val year = myCalendar.get(Calendar.YEAR)
+         val month = myCalendar.get(Calendar.MONTH)
+         val day = myCalendar.get(Calendar.DAY_OF_MONTH)
 
-        val mycalender = Calendar.getInstance()
-        val year = mycalender.get(Calendar.YEAR)
-        val month = mycalender.get(Calendar.MONTH)
-        val day = mycalender.get(Calendar.DAY_OF_MONTH)
-       val dpdp = DatePickerDialog(this,
-            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                Toast.makeText(this, "cliked", Toast.LENGTH_LONG).show()
-                val selecteddate = "$dayOfMonth/${month + 1}/$year"
-                tvselecteddate?.text = selecteddate
-                val sdf =SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH)
-                val thedate=sdf.parse(selecteddate)
-                thedate?.let {
-                val selectedinmin = thedate.getTime()/3600000
-                val current = sdf.parse(sdf.format(System.currentTimeMillis()))
-                    current?.let {
-                        val currentm = current.time / 3600000
-                        tvinminutes?.text = (currentm - selectedinmin).toString()
-                    }
-                }
-            },
-            year,
-            month,
-            day
-        )
-        dpdp.datePicker.maxDate=System.currentTimeMillis()-(24*3600)
-        dpdp.show()
+         val currentDate ="$day/${month+1}/$year"
+         val sdf =SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH)
+         val nCurrentDate = sdf.parse(currentDate)
+         var fCurrentDate = 0L
+         nCurrentDate?.let {  fCurrentDate = nCurrentDate.time }
 
-    }
+       val dbd =  DatePickerDialog(this,DatePickerDialog.OnDateSetListener { _, sYear, sMonth, sDay ->
+
+             val selDate ="$sDay/${sMonth+1}/$sYear"
+             selDateText?.text = selDate
+             val nSelDate = sdf.parse(selDate)
+             var fSelDate = 0L
+             nSelDate?.let { fSelDate = nSelDate.time}
+
+             val diffDate = fCurrentDate - fSelDate
+
+             inDaysText?.text = (diffDate/(1000*3600*24)).toString()
+             inHoursText?.text = (diffDate/(1000*3600)).toString()
+             inMinuteText?.text = (diffDate/(1000*60)).toString()
+             inSecondsText?.text = (diffDate/(1000)).toString()
 
 
-    private  fun click() {
+         },
+             year,
+             month,
+             day
+         )
 
-        DatePickerDialog(this,DatePickerDialog.OnDateSetListener{view,year:Int,month,day->
+       dbd.datePicker.maxDate = fCurrentDate
+       dbd.show()
 
-            val selecteddate = "$day/${month + 1}/$year"
-            tvselecteddate?.text = selecteddate
-
-        },2022,5,23).show()
-
-
-    }
+     }
 }
 
 

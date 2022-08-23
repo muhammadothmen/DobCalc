@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/bgcolor"
+    android:background="@color/MainBg"
     android:padding="16dp"
     >
 
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="CALCULATE YOUR"
-        android:textColor="@color/bluetext"
+        android:textColor="@color/BlueTxt"
         android:textSize="25sp"
         android:textStyle="bold"
 
@@ -27,8 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="AGE"
-        android:background="@color/bluetext"
-        android:textColor="@color/white"
+        android:background="@color/TxtBg"
+        android:textColor="@color/BlueTxt"
         android:padding="10dp"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -39,53 +39,54 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="IN MINUTE"
-        android:textColor="@color/bluetext"
+        android:textColor="@color/BlueTxt"
         android:textSize="25sp"
         android:textStyle="bold"
 
         />
 
     <Button
-        android:id="@+id/btndate"
+        android:id="@+id/BtnDateSel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SELECT DATE"
-        android:textSize="18dp"
+        android:textSize="20dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/buttonbgcolor"
-        android:textColor="@color/lightgray"
+        android:backgroundTint="@color/BtnBgColor"
+        android:textColor="@color/black"
 
         />
 
     <TextView
-        android:id="@+id/selecteddate"
+        android:id="@+id/TxtSelDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="27/10/1994"
-        android:textColor="@color/bluetext"
-        android:textSize="18sp"
+        android:text="dd/mm/yyyy"
+        android:textColor="@color/BlueTxt"
+        android:textSize="20sp"
 
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="6dp"
         android:text="Selected Date"
-        android:textColor="@color/lightgray"
-        android:textSize="20sp"
+        android:textColor="@color/GrayText"
+        android:textSize="16sp"
         android:textStyle="normal"
 
         />
 
+
     <TextView
-        android:id="@+id/inminutes"
+        android:id="@+id/TxtInDays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="14000000"
-        android:textColor="@color/bluetext"
+        android:text="0000"
+        android:textColor="@color/BlueTxt"
         android:textSize="35sp"
         android:textStyle="bold"
 
@@ -94,10 +95,78 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="In minutes till date"
-        android:textColor="@color/lightgray"
-        android:textSize="20sp"
+        android:layout_marginTop="6dp"
+        android:text="Your Age In Days"
+        android:textColor="@color/GrayText"
+        android:textSize="16sp"
+        android:textStyle="normal"
+
+        />
+
+    <TextView
+        android:id="@+id/TxtInHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="000000"
+        android:textColor="@color/BlueTxt"
+        android:textSize="35sp"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Your Age In Hours"
+        android:textColor="@color/GrayText"
+        android:textSize="16sp"
+        android:textStyle="normal"
+
+        />
+
+    <TextView
+        android:id="@+id/TxtInMinute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="00000000"
+        android:textColor="@color/BlueTxt"
+        android:textSize="35sp"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Your Age In minutes"
+        android:textColor="@color/GrayText"
+        android:textSize="16sp"
+        android:textStyle="normal"
+
+        />
+    <TextView
+        android:id="@+id/TxtInSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="0000000000"
+        android:textColor="@color/BlueTxt"
+        android:textSize="35sp"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Your Age In Seconds"
+        android:textColor="@color/GrayText"
+        android:textSize="16sp"
         android:textStyle="normal"
 
         />
