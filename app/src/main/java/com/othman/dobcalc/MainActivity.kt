@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +15,14 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var mainHandler: Handler
+    private val updateTextTask = object : Runnable {
+        override fun run() {
+            display()
+            mainHandler.postDelayed(this, 1000)
+        }
+    }
+
       private  var selDateBtn: Button?=null
       private  var dayBtn: Button?=null
       private  var minBtn: Button?=null
@@ -21,12 +31,15 @@ class MainActivity : AppCompatActivity() {
       private  var outText: TextView? = null
       private  var selDateText: TextView? = null
       private  var yourAgText: TextView? = null
+      private  var sdf =SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH)
       private  val myCalendar =Calendar.getInstance()
       private  var year = myCalendar.get(Calendar.YEAR)
       private  var month = myCalendar.get(Calendar.MONTH)
       private  var day = myCalendar.get(Calendar.DAY_OF_MONTH)
       private  var diffDate = 0L
+      private  var fSelDate = 0L
       private  var i = 0
+      private  var j = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,58 +59,53 @@ class MainActivity : AppCompatActivity() {
         }
 
         secondBtn?.setOnClickListener {
-            if(i==1) {
+            if(j==5) {
                 yourAgText?.text = "Your age is :"
-                outText?.text =
-                    "${(diffDate / (1000)).toString()}\n Seconds"
+                outText?.text = "${(diffDate / (1000)).toString()}\n Seconds"
+                i=1
             }
         }
 
         minBtn?.setOnClickListener {
-            if(i==1) {
+            if(j==5) {
                 yourAgText?.text = "Your age is :"
                 outText?.text = "${(diffDate / (1000 * 60)).toString()}\n Minutes"
+                i=2
             }
         }
 
         hourBtn?.setOnClickListener {
-            if (i == 1){
+            if(j==5) {
                 yourAgText?.text = "Your age is :"
-            outText?.text = "${(diffDate / (1000 * 60 * 60)).toString()}\n Hours"
+                outText?.text = "${(diffDate / (1000 * 60 * 60)).toString()}\n Hours"
+                i=3
             }
         }
 
         dayBtn?.setOnClickListener {
-            if(i==1) {
+            if(j==5) {
                 yourAgText?.text = "Your age is :"
                 outText?.text = "${(diffDate / (1000 * 60 * 60 * 24)).toString()}\n Days"
+                i=4
             }
         }
 
+
+        mainHandler = Handler(Looper.getMainLooper())
+
     }
-    @SuppressLint("SetTextI18n")
+
     private fun selDateBtnClicked (){
         val dbd =  DatePickerDialog(this,DatePickerDialog.OnDateSetListener { _, sYear, sMonth, sDay ->
 
             val selDate ="$sDay/${sMonth+1}/$sYear"
-            val sdf =SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH)
-            selDateText?.text = "Your Birthday is $selDate"
+            selDateText?.text = "Your Birthday is: $selDate"
             val nSelDate = sdf.parse(selDate)
-            var fSelDate = 0L
             nSelDate?.let { fSelDate = nSelDate.time}
-            year = myCalendar.get(Calendar.YEAR)
-            month = myCalendar.get(Calendar.MONTH)
-            day = myCalendar.get(Calendar.DAY_OF_MONTH)
-            val currentDate ="$day/${month+1}/$year"
-            val nCurrentDate = sdf.parse(currentDate)
-            var fCurrentDate = 0L
-            nCurrentDate?.let {  fCurrentDate = nCurrentDate.time }
-            diffDate = fCurrentDate - fSelDate
-
-            outText?.text =" Select by"
-            i=1
-            yourAgText?.text = ""
-
+            yourAgText?.text =" Select unit"
+            outText?.text = ""
+            j=5
+            i=5
         },
             year,
             month,
@@ -107,10 +115,42 @@ class MainActivity : AppCompatActivity() {
         dbd.datePicker.maxDate = System.currentTimeMillis() - (1000*3600*24)
         dbd.show()
 
-
-
-
      }
+
+    override fun onPause() {
+        super.onPause()
+        mainHandler.removeCallbacks(updateTextTask)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainHandler.post(updateTextTask)
+    }
+
+    fun display () {
+
+        diffDate = System.currentTimeMillis() - fSelDate
+
+        when(i){
+
+            1 -> {
+                yourAgText?.text = "Your age is :"
+                outText?.text = "${(diffDate / (1000)).toString()}\n Seconds"
+            }
+            2 -> {
+                yourAgText?.text = "Your age is :"
+                outText?.text = "${(diffDate / (1000 * 60)).toString()}\n Minutes"
+            }
+            3 -> {
+                yourAgText?.text = "Your age is :"
+                outText?.text = "${(diffDate / (1000 * 60 * 60)).toString()}\n Hours"
+            }
+            4 -> {
+                yourAgText?.text = "Your age is :"
+                outText?.text = "${(diffDate / (1000 * 60 * 60 * 24)).toString()}\n Days"
+            }
+        }
+    }
 }
 
 

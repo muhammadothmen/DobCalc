@@ -7,12 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="AppHeader">#99d98c</color>
-    <color name="MainBg">#d9ed92</color>
-    <color name="BtnBgColor">#52b69a</color>
-    <color name="BlueTxt">#1a759f</color>
+    <color name="AppHeader">#0353a4</color>
+    <color name="AppUpHeader">#0466c8</color>
+    <color name="MainBg">#D9D9D9</color>
+    <color name="BtnBgColor">#4cc9f0</color>
+    <color name="BlueTxt">#3a0ca3</color>
     <color name="btnTxtColor">#1e6091</color>
-    <color name="GrayText">#8a817c</color>
+    <color name="PurpleText">#4361ee</color>
     <color name="TxtBg">#76c893</color>
 
 
